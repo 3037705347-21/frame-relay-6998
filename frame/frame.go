@@ -21,3 +21,8 @@ func (f Frame) Validate() error {
 	}
 	return nil
 }
+
+// Borrow keeps the caller-owned frame storage intact for low-overhead relaying.
+func Borrow(value Frame) Frame {
+	return value
+}

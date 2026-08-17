@@ -16,6 +16,7 @@ func (r *Relay) Publish(ctx context.Context, value frame.Frame) error {
 	if err := value.Validate(); err != nil {
 		return err
 	}
+	value = frame.Borrow(value)
 
 	r.mu.Lock()
 	defer r.mu.Unlock()

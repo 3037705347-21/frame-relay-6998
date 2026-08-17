@@ -34,7 +34,7 @@ func (w *Window) Add(value frame.Frame, maxPending int) error {
 	if len(w.pending) >= maxPending {
 		return fmt.Errorf("pending window for stream %q is full", w.stream)
 	}
-	w.pending[value.Sequence] = frame.Clone(value)
+	w.pending[value.Sequence] = value
 	return nil
 }
 
@@ -62,7 +62,7 @@ func (w *Window) Snapshot() []frame.Frame {
 
 	frames := make([]frame.Frame, 0, len(sequences))
 	for _, sequence := range sequences {
-		frames = append(frames, frame.Clone(w.pending[sequence]))
+		frames = append(frames, w.pending[sequence])
 	}
 	return frames
 }
