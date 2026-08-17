@@ -1,4 +1,4 @@
-# frame-relay-6998 Docker 交付说明
+# frame-relay__003 Docker 交付说明
 
 ## 项目概览
 - Frame Relay is an in-memory Go library for coordinating ordered protocol frames
@@ -14,8 +14,8 @@ go test ./...
 ## Docker 构建
 
 ```bash
-./build_benzhi_docker.sh frame-relay-6998-benzhi linux/amd64
-docker run --rm -it frame-relay-6998-benzhi bash
+./build_benzhi_docker.sh frame-relay__003-benzhi linux/amd64
+docker run --rm -it frame-relay__003-benzhi bash
 ```
 
 ## 环境

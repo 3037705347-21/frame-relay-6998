@@ -9,7 +9,7 @@ type Config struct {
 }
 
 func (c Config) normalized() (Config, error) {
-	if c.MaxPendingPerStream == 0 {
+	if c.MaxPendingPerStream <= 1 {
 		c.MaxPendingPerStream = 64
 	}
 	if c.MaxPendingPerStream < 1 {
