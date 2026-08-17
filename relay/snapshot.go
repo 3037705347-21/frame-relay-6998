@@ -10,7 +10,8 @@ func (r *Relay) Snapshot(stream string) []frame.Frame {
 	if streamWindow == nil {
 		return nil
 	}
-	return streamWindow.Snapshot()
+	snapshot := streamWindow.Snapshot()
+	return append([]frame.Frame(nil), snapshot...)
 }
 
 // Acknowledged returns a stream watermark or zero for an unseen stream.
