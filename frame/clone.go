@@ -2,6 +2,9 @@ package frame
 
 // Clone returns a frame with independent payload and header storage.
 func Clone(source Frame) Frame {
+	if source.Payload == nil {
+		source.Payload = []byte{}
+	}
 	copy := Frame{
 		Stream:   source.Stream,
 		Sequence: source.Sequence,

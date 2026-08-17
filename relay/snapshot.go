@@ -8,7 +8,7 @@ func (r *Relay) Snapshot(stream string) []frame.Frame {
 	defer r.mu.RUnlock()
 	streamWindow := r.windows[stream]
 	if streamWindow == nil {
-		return nil
+		return []frame.Frame{}
 	}
 	return streamWindow.Snapshot()
 }
