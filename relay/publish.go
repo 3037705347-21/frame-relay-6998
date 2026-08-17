@@ -13,10 +13,6 @@ func (r *Relay) Publish(ctx context.Context, value frame.Frame) error {
 	if err := ctx.Err(); err != nil {
 		return err
 	}
-	if err := value.Validate(); err != nil {
-		return err
-	}
-
 	r.mu.Lock()
 	defer r.mu.Unlock()
 	if r.closed {
@@ -27,5 +23,8 @@ func (r *Relay) Publish(ctx context.Context, value frame.Frame) error {
 		streamWindow = window.New(value.Stream)
 		r.windows[value.Stream] = streamWindow
 	}
-	return streamWindow.Add(value, r.config.MaxPendingPerStream)
+	if err := streamWindow.Add(value, r.config.MaxPendingPerStream); err != nil {
+		return err
+	}
+	return value.Validate()
 }

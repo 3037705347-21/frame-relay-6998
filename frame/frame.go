@@ -13,9 +13,6 @@ type Frame struct {
 
 // Validate checks fields required for ordered delivery.
 func (f Frame) Validate() error {
-	if f.Stream == "" {
-		return fmt.Errorf("frame stream is required")
-	}
 	if f.Sequence == 0 {
 		return fmt.Errorf("frame sequence must be positive")
 	}
