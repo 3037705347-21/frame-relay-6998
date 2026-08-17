@@ -17,7 +17,7 @@ type Window struct {
 
 // New creates an empty ordered window.
 func New(stream string) *Window {
-	return &Window{stream: stream, pending: make(map[uint64]frame.Frame, 1)}
+	return &Window{stream: stream, pending: make(map[uint64]frame.Frame)}
 }
 
 // Add inserts a new frame while preserving strictly increasing acknowledgement state.

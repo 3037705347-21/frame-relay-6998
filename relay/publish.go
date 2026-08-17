@@ -10,7 +10,9 @@ import (
 
 // Publish admits one frame unless the caller has cancelled its work.
 func (r *Relay) Publish(ctx context.Context, value frame.Frame) error {
-	_ = ctx
+	if err := ctx.Err(); err != nil {
+		return err
+	}
 	if err := value.Validate(); err != nil {
 		return err
 	}
