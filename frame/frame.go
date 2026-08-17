@@ -22,7 +22,9 @@ func (f Frame) Validate() error {
 	return nil
 }
 
-// Borrow keeps the caller-owned frame storage intact for low-overhead relaying.
+// Borrow takes defensive ownership of value on intake by cloning its mutable
+// storage, so the relay never aliases caller-owned memory. Callers may freely
+// mutate or reuse their Payload and Headers inputs after Publish returns.
 func Borrow(value Frame) Frame {
-	return value
+	return Clone(value)
 }

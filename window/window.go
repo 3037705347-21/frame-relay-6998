@@ -62,7 +62,7 @@ func (w *Window) Snapshot() []frame.Frame {
 
 	frames := make([]frame.Frame, 0, len(sequences))
 	for _, sequence := range sequences {
-		frames = append(frames, w.pending[sequence])
+		frames = append(frames, frame.Clone(w.pending[sequence]))
 	}
 	return frames
 }
