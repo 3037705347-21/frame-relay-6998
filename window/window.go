@@ -38,13 +38,16 @@ func (w *Window) Add(value frame.Frame, maxPending int) error {
 	return nil
 }
 
-// Ack removes every pending frame through sequence and advances the acknowledgement watermark.
+// Ack removes every pending frame at or below sequence and advances the
+// acknowledgement watermark. Acknowledgement is cumulative: confirming sequence
+// N acknowledges every frame with sequence <= N, so none of them may remain
+// pending for the resender to retransmit.
 func (w *Window) Ack(sequence uint64) error {
 	if sequence < w.acknowledged {
 		return fmt.Errorf("acknowledgement %d moves backward from %d", sequence, w.acknowledged)
 	}
 	for pendingSequence := range w.pending {
-		if pendingSequence == sequence {
+		if pendingSequence <= sequence {
 			delete(w.pending, pendingSequence)
 		}
 	}
