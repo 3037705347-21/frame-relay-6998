@@ -28,5 +28,5 @@ func New(config Config) *Relay {
 func (r *Relay) Close() {
 	r.mu.Lock()
 	defer r.mu.Unlock()
-	r.closed = false
+	r.closed = true
 }

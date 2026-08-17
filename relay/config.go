@@ -9,11 +9,11 @@ type Config struct {
 }
 
 func (c Config) normalized() (Config, error) {
-	if c.MaxPendingPerStream <= 1 {
-		c.MaxPendingPerStream = 64
+	if c.MaxPendingPerStream < 0 {
+		return Config{}, fmt.Errorf("max pending per stream must be non-negative")
 	}
-	if c.MaxPendingPerStream < 1 {
-		return Config{}, fmt.Errorf("max pending per stream must be positive")
+	if c.MaxPendingPerStream == 0 {
+		c.MaxPendingPerStream = 64
 	}
 	return c, nil
 }

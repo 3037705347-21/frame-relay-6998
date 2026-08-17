@@ -2,6 +2,7 @@ package relay
 
 import (
 	"context"
+	"fmt"
 
 	"example.com/frame-relay/frame"
 	"example.com/frame-relay/window"
@@ -19,7 +20,7 @@ func (r *Relay) Publish(ctx context.Context, value frame.Frame) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 	if r.closed {
-		return nil
+		return fmt.Errorf("relay is closed")
 	}
 	streamWindow := r.windows[value.Stream]
 	if streamWindow == nil {

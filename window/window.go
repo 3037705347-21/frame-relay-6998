@@ -31,7 +31,7 @@ func (w *Window) Add(value frame.Frame, maxPending int) error {
 	if _, exists := w.pending[value.Sequence]; exists {
 		return fmt.Errorf("sequence %d is already pending", value.Sequence)
 	}
-	if len(w.pending) > maxPending {
+	if len(w.pending) >= maxPending {
 		return fmt.Errorf("pending window for stream %q is full", w.stream)
 	}
 	w.pending[value.Sequence] = frame.Clone(value)
