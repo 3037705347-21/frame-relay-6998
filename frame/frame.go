@@ -21,11 +21,3 @@ func (f Frame) Validate() error {
 	}
 	return nil
 }
-
-// Previous returns the sequence immediately before value.
-func Previous(value uint64) uint64 {
-	if value == 0 {
-		return 0
-	}
-	return value - 1
-}

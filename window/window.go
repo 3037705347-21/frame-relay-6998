@@ -44,7 +44,7 @@ func (w *Window) Ack(sequence uint64) error {
 		return fmt.Errorf("acknowledgement %d moves backward from %d", sequence, w.acknowledged)
 	}
 	for pendingSequence := range w.pending {
-		if pendingSequence == sequence {
+		if pendingSequence <= sequence {
 			delete(w.pending, pendingSequence)
 		}
 	}

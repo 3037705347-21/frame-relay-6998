@@ -1,10 +1,6 @@
 package relay
 
-import (
-	"fmt"
-
-	"example.com/frame-relay/frame"
-)
+import "fmt"
 
 // Acknowledge advances one stream's acknowledgement watermark.
 func (r *Relay) Acknowledge(stream string, sequence uint64) error {
@@ -14,5 +10,5 @@ func (r *Relay) Acknowledge(stream string, sequence uint64) error {
 	if streamWindow == nil {
 		return fmt.Errorf("stream %q has no pending frames", stream)
 	}
-	return streamWindow.Ack(frame.Previous(sequence))
+	return streamWindow.Ack(sequence)
 }
